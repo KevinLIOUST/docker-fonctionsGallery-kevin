@@ -1,14 +1,5 @@
 <?php
-// Il faut faire 1 fonction :
-
-// Soit pour afficher 10 femmes
-// Soit pour afficher 5 femmes
-// Soit pour afficher 5 hommes
-// Soit pour afficher toutes les photos
-
 require_once "data/users.php";
-
-// var_dump($_GET);
 
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
@@ -111,9 +102,6 @@ shuffle($users);
     </div>
 
     <main class="container-fluid div-photo py-4">
-        <!-- <div>
-            <img class="taille-img rounded-4" src="assets/img/photo_6.jpg" alt="assets/img/photo_6.jpg">
-        </div> -->
         <?php
         generationGallery($users, $type, 10);
         ?>

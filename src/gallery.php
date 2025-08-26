@@ -8,7 +8,7 @@
 
 require_once "data/users.php";
 
-var_dump($_GET);
+// var_dump($_GET);
 
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
@@ -20,12 +20,14 @@ if (isset($_GET['type'])) {
 }
 
 // Fonction pour afficher les photos des gens en fonction de leurs paramètres pour le genre, le tableau des users et le nombre d'affichage
-function generationGallery($users, $genre = "")
+function generationGallery($users, $genre = "", $nbAffichage = "")
 {
     if ($genre == "Femme") {
-        // $nbAffichage = 10;
         for ($i = 0; $i < count($users); $i++) {
             if ($users[$i]["genre"] == $genre) {
+                if ($nbAffichage == 0) {
+                    break;
+                }
                 $photo = $users[$i]["photo"];
                 $prenom = $users[$i]["prenom"];
                 $nom = $users[$i]["nom"];
@@ -36,12 +38,15 @@ function generationGallery($users, $genre = "")
                         <p>$genre</p>
                     </div>
                 ";
+                $nbAffichage--;
             }
         }
     } elseif ($genre == "Homme") {
-        // $nbAffichage = 10;
         for ($i = 0; $i < count($users); $i++) {
             if ($users[$i]["genre"] == $genre) {
+                if ($nbAffichage == 0) {
+                    break;
+                }
                 $photo = $users[$i]["photo"];
                 $prenom = $users[$i]["prenom"];
                 $nom = $users[$i]["nom"];
@@ -52,10 +57,10 @@ function generationGallery($users, $genre = "")
                         <p>$genre</p>
                     </div>
                 ";
+                $nbAffichage--;
             }
         }
     } else {
-        // $nbAffichage = 10;
         for ($i = 0; $i < count($users); $i++) {
             $photo = $users[$i]["photo"];
             $prenom = $users[$i]["prenom"];
@@ -110,7 +115,7 @@ shuffle($users);
             <img class="taille-img rounded-4" src="assets/img/photo_6.jpg" alt="assets/img/photo_6.jpg">
         </div> -->
         <?php
-        generationGallery($users, $type);
+        generationGallery($users, $type, 10);
         ?>
     </main>
 

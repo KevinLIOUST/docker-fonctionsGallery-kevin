@@ -1,11 +1,14 @@
 <?php
 require_once "data/users.php";
 
+$allTypes = array("Homme", "Femme");
+$noFound = false;
+
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
-    // if (!in_array($type, $allTypes)) {
-    //     $noFound = true;
-    // }
+    if (!in_array($type, $allTypes)) {
+        $noFound = true;
+    }
 } else {
     $type = 'all';
 }
@@ -101,10 +104,15 @@ shuffle($users);
         <a class="m-4 btn btn-secondary taille-police-btns border-btns" href="gallery.php?type=Femme">Femmes</a>
     </div>
 
-    <main class="container-fluid div-photo py-4">
-        <?php
-        generationGallery($users, $type, 10);
-        ?>
+    <?php if ($noFound) { ?>
+        <div class="d-flex justify-content-center fs-1">
+            <p>La catégorie <b><?= $type ?></b> n'existe pas !!!!</p>
+        </div>
+    <?php } else { ?>
+        <main class="container-fluid div-photo py-4">
+            <?php
+            generationGallery($users, $type, 10);
+    } ?>
     </main>
 
     <footer class="bg-dark text-white text-center mt-auto py-4">
